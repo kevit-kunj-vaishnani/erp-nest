@@ -2,6 +2,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';  // for db connection
 import { ConfigModule } from '@nestjs/config';      // for db connection
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -10,8 +11,10 @@ import { ConfigModule } from '@nestjs/config';      // for db connection
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.DB_URL),
+    UserModule,
   ],
   controllers: [],
   providers: [],
 })
+
 export class AppModule {}
