@@ -4,7 +4,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 
 @Injectable()
@@ -40,7 +39,7 @@ export class UserService {
         return user;
     }
 
-    async findOneUserAndUpdate(id:string, data: UpdateUserDto){
+    async findOneUserAndUpdate(id:string, attrs: Partial<User>){
     
         const user = await this.userModel.findById(id);
    
@@ -48,7 +47,7 @@ export class UserService {
         throw new NotFoundException('user not found in updateUserById in user.service.ts');
         }
         
-        Object.assign(user, data);
+        Object.assign(user, attrs);
         return user.save();
     }
 

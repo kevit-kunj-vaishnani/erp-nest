@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
+import { UpdateSelfDto } from './dto/update-self.dto';
 
 @Controller('user')
 export class UserController {
@@ -25,11 +26,17 @@ export class UserController {
     async findUsers() {
         return await this.userService.findAllUser();
     }
+    
+    @Patch('/update/me')
+    updateSelf(@Body() body: UpdateSelfDto, @Session() session: any) {
+        return this.userService.findOneUserAndUpdate(session.userid, body);
+    }
 
     @Patch('/update/:_id')
     getUserByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateUserDto){
         return this.userService.findOneUserAndUpdate(_id,body)
     }
+
 
     @Delete('/delete/:_id')
     getUserByIdAndDelete(@Param('_id') _id: string){
