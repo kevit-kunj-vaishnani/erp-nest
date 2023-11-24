@@ -43,7 +43,7 @@ export class UserController {
       session.userid = user._id;
       session.role = user.role;
     
-      return session.userid;
+      return user;
     }
 
     @Get('/self')
@@ -52,12 +52,14 @@ export class UserController {
     }
 
     @Post('/logout')
-    logout(@Session() session:any){
+    async logout(@Session() session:any){
+
+        const user = await this.userService.findUser(session.userid);
 
         session.userid = null;
         session.role = null;  
 
-        return 'user logout'
+        return user;
     }
 
     @Get('/:_id')

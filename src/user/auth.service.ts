@@ -24,6 +24,11 @@ import {
             throw new BadRequestException(' Email already in use');
         }
 
+        // const salt = randomBytes(8).toString('hex');    //hex = salt will be in num, alphabet    // this will only hash pass on add . as we ant on update also so for that in schema
+        // const hash = (await scrypt (user.password, salt, 32)) as Buffer;
+        // const finalPassword = salt + '.' + hash.toString('hex');
+        // user.password = finalPassword;
+
         const userCreate = await this.userService.createUser(user);
 
         return userCreate;

@@ -25,9 +25,7 @@ export class UserService {
         return user;
     }
 
-    async findUser(id:string){
-        console.log(id);
-        
+    async findUser(id:string){  
         const user = await this.userModel.findById(id);
 
         if(!user){
@@ -59,7 +57,7 @@ export class UserService {
         const user = await this.userModel.findById(id);
 
         if (!user) {
-        throw new NotFoundException('user not found in updateUserById in user.service.ts');
+            throw new NotFoundException('user not found in updateUserById in user.service.ts');
         }
 
         return this.userModel.findByIdAndDelete(id);
