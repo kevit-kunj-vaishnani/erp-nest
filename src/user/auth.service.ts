@@ -36,12 +36,12 @@ import {
 
     async login(email: string, password: string) {
         
-        const [user] = await this.userService.findByEmail(email);
+      const [user] = await this.userService.findByEmail(email);
         
         if (!user) {
           throw new NotFoundException('Invalid Credentials');
         }
-        
+
         const [salt, storedHash] = user.password.split('.');
         
         const hash = (await scrypt(password, salt, 32)) as Buffer;

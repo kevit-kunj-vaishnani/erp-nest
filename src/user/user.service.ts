@@ -21,6 +21,8 @@ export class UserService {
 
     async findAllUser(){
         const user = await this.userModel.find();
+        console.log(user);
+        
         return user;
     }
 
