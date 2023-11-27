@@ -19,8 +19,11 @@ export class StudentController {
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
     async addStudent(@Body() student:CreateStudentDto) {
+        await this.studentService.checkSeatCount(student.departmentId)
         
         const studentD = await this.authService.addStudent(student);
+        
+        await this.studentService.increaseSeatCount(student.departmentId)
         
         return studentD;
     }
@@ -51,8 +54,11 @@ export class StudentController {
     @Delete('/delete/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    getStudentByIdAndDelete(@Param('_id') _id: string){
-        return this.studentService.findOneStudentByIdAndDelete(_id)
+    async getStudentByIdAndDelete(@Param('_id') _id: string){
+        const student = await this.studentService.findOneStudentByIdAndDelete(_id)
+
+        await this.studentService.decreaseSeatOccupied(student.departmentId)
+        return student
     }
 
     @Post('/login')

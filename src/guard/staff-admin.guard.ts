@@ -6,8 +6,6 @@ export class StaffAdminGuard implements CanActivate {
     
     const request = context.switchToHttp().getRequest();
 
-    console.log(request.session.role);
-
     if (request.session.role === 'STUDENT') {
       return false;
     }

@@ -1,14 +1,24 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import {
+  Inject,
+  Injectable,
+  NotFoundException,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Department } from './schemas/department.schema';
 import { CreateDepartmentDto } from './dto/create-department.dto';
+import { StudentService } from 'src/student/student.service';
 
 @Injectable()
 export class DepartmentService {
   constructor(
     @InjectModel('Department') //  This decorator is used to inject a MongoDB/Mongoose model into the DepartmentsService class
     private departmentModel: mongoose.Model<Department>,
+    
+    @Inject(forwardRef(() => StudentService))
+    private studentService: StudentService,
   ) {}
 
   async createDepartment(createDepartmentDto: CreateDepartmentDto) {
@@ -54,6 +64,7 @@ export class DepartmentService {
       );
     }
 
+    await this.studentService.deleteAllStudent(id);
     return this.departmentModel.findByIdAndDelete(id);
   }
 }
