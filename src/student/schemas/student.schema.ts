@@ -5,7 +5,7 @@ import { NextFunction } from 'express';
 import { promisify } from 'util';
 
 @Schema()
-export class User {
+export class Student {
     
     @Prop({required: true})
     name: string;
@@ -20,7 +20,7 @@ export class User {
     phone: number;
 
     @Prop({required: true})
-    designation: string;
+    sem: number;
 
     @Prop({required: true})
     departmentId: string;
@@ -29,9 +29,9 @@ export class User {
     role: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User)
+export const StudentSchema = SchemaFactory.createForClass(Student)
 
-UserSchema.pre('save', async function (next: NextFunction) {
+StudentSchema.pre('save', async function (next: NextFunction) {
     
     const scrypt = promisify(_scrypt);
     

@@ -2,10 +2,10 @@
 import { Body, Controller, Post, Get, Param, Patch, Delete, Session, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateAllDto } from './dto/update-all-fields.dto';
 import { AuthService } from './auth.service';
-import { LoginUserDto } from './dto/login-user.dto';
-import { UpdateSelfDto } from './dto/update-self.dto';
+import { LoginDto } from './dto/login.dto';
+import { UpdateSelfDto } from './dto/update-self-password.dto';
 import { AdminGuard } from 'src/guard/admin.guard';
 import { AuthGuard } from 'src/guard/auth.gaurd';
 import { StaffAdminGuard } from 'src/guard/staff-admin.guard';
@@ -36,13 +36,13 @@ export class UserController {
     @UseGuards(StaffAdminGuard)
     @Patch('/update/me')
     updateSelf(@Body() body: UpdateSelfDto, @Session() session: any) {
-        return this.userService.findOneUserAndUpdate(session.userid, body);
+        return this.userService.findOneUserAndUpdate(session._id, body);
     }
 
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
     @Patch('/update/:_id')
-    getUserByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateUserDto){
+    getUserByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateAllDto){
         return this.userService.findOneUserAndUpdate(_id,body)
     }
 
@@ -54,11 +54,11 @@ export class UserController {
     }
 
     @Post('/login')
-    async signIn(@Body() body: LoginUserDto, @Session() session: any) {
+    async signIn(@Body() body: LoginDto, @Session() session: any) {
       
       const user = await this.authService.login(body.email, body.password);
 
-      session.userid = user._id;
+      session._id = user._id;
       session.role = user.role;
       
       return user;
@@ -68,22 +68,23 @@ export class UserController {
     @UseGuards(StaffAdminGuard)
     @Get('/self')
     async me(@Session() session: any){
-        return await this.userService.findUser(session.userid);
+        return await this.userService.findUser(session._id);
     }
 
     @UseGuards(AuthGuard)
-    @UseGuards(StaffAdminGuard)
     @Post('/logout')
     async logout(@Session() session:any){
 
-        const user = await this.userService.findUser(session.userid);
+        const user = await this.userService.findUser(session._id);
 
-        session.userid = null;
+        session._id = null;
         session.role = null;  
 
         return user;
     }
 
+    @UseGuards(AuthGuard)
+    @UseGuards(StaffAdminGuard)
     @Get('/:_id')
     async findUserById(@Param('_id') _id:string) {
         return await this.userService.findUser(_id);
