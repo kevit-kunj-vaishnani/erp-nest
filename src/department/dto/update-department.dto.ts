@@ -12,7 +12,7 @@ export class UpdateDepartDto {
 
   @IsNumber()
   @IsOptional()
-  avialableSeats: number;
+  availableSeats: number;
 
   @IsNumber()
   @IsOptional()
