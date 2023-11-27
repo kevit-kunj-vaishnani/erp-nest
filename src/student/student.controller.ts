@@ -32,25 +32,25 @@ export class StudentController {
         return await this.studentService.findAllStudent();
     }
     
+    @Patch('/update/myself')
     @UseGuards(AuthGuard)
     @UseGuards(StudentGuard)
-    @Patch('/update/myself')
     updateStudentSelf(@Body() body: UpdateStudentSelfDto, @Session() session: any) {
         console.log(session);
         
         return this.studentService.findOneStudentAndUpdate(session._id, body);
     }
 
+    @Patch('/update/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    @Patch('/update/:_id')
     getStudentByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateAllDto){
         return this.studentService.findOneStudentAndUpdate(_id,body)
     }
 
+    @Delete('/delete/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    @Delete('/delete/:_id')
     getStudentByIdAndDelete(@Param('_id') _id: string){
         return this.studentService.findOneStudentByIdAndDelete(_id)
     }
@@ -66,15 +66,15 @@ export class StudentController {
       return student;
     }
 
+    @Get('/self')
     @UseGuards(AuthGuard)
     @UseGuards(StudentGuard)
-    @Get('/self')
     async me(@Session() session: any){
         return await this.studentService.findStudent(session._id);
     }
 
-    @UseGuards(AuthGuard)
     @Post('/logout')
+    @UseGuards(AuthGuard)
     async logout(@Session() session:any){
 
         const student = await this.studentService.findStudent(session._id);
@@ -85,9 +85,9 @@ export class StudentController {
         return student;
     }
 
+    @Get('/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    @Get('/:_id')
     async findStudentById(@Param('_id') _id:string) {
         return await this.studentService.findStudent(_id);
     }

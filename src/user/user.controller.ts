@@ -32,23 +32,23 @@ export class UserController {
         return await this.userService.findAllUser();
     }
     
+    @Patch('/update/me')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    @Patch('/update/me')
     updateSelf(@Body() body: UpdateSelfDto, @Session() session: any) {
         return this.userService.findOneUserAndUpdate(session._id, body);
     }
-
+    
+    @Patch('/update/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
-    @Patch('/update/:_id')
     getUserByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateAllDto){
         return this.userService.findOneUserAndUpdate(_id,body)
     }
 
+    @Delete('/delete/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
-    @Delete('/delete/:_id')
     getUserByIdAndDelete(@Param('_id') _id: string){
         return this.userService.findOneUserByIdAndDelete(_id)
     }
@@ -64,15 +64,15 @@ export class UserController {
       return user;
     }
 
+    @Get('/self')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    @Get('/self')
     async me(@Session() session: any){
         return await this.userService.findUser(session._id);
     }
 
-    @UseGuards(AuthGuard)
     @Post('/logout')
+    @UseGuards(AuthGuard)
     async logout(@Session() session:any){
 
         const user = await this.userService.findUser(session._id);
@@ -83,9 +83,9 @@ export class UserController {
         return user;
     }
 
+    @Get('/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
-    @Get('/:_id')
     async findUserById(@Param('_id') _id:string) {
         return await this.userService.findUser(_id);
     }
