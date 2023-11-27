@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { NextFunction } from 'express';
 import { promisify } from 'util';
+import { Roles } from 'src/role';
 
 @Schema()
 export class Student {
@@ -25,7 +26,7 @@ export class Student {
     @Prop({required: true})
     departmentId: string;
 
-    @Prop({required: true})
+    @Prop({default: Roles.STUDENT, required: true})
     role: string;
 }
 
