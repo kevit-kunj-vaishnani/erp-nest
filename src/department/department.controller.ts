@@ -19,6 +19,9 @@ import { UpdateDepartDto } from './dto/update-department.dto';
 export class DepartmentController {
   constructor(private departmentService: DepartmentService) {}
 
+  /**
+   * POST:- Create Department
+   */
   @Post('/add')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
@@ -28,20 +31,19 @@ export class DepartmentController {
     return departmentD;
   }
 
+  /**
+   * GET:- Find Departments
+   */
   @Get()
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
   async findDepartments() {
     return await this.departmentService.findAllDepartment();
   }
-
-  @Get('/:_id')
-  @UseGuards(AuthGuard)
-  @UseGuards(AdminGuard)
-  async findDepartmentById(@Param("_id") _id: string) {
-    return await this.departmentService.findOneDepartment(_id);
-  }
   
+  /**
+   * UPDATE:- Update Department
+   */
   @Patch('/update/:_id')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
@@ -49,10 +51,63 @@ export class DepartmentController {
     return this.departmentService.findOneDepartmentAndUpdate(_id, body);
   }
 
+  /**
+   * DELETE:- Delete Department
+   */
   @Delete('/delete/:_id')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
   getDepartmentByIdAndDelete(@Param('_id') _id: string) {
     return this.departmentService.findOneDepartmentByIdAndDelete(_id);
+  }
+  
+  /**
+   * POST:- QUERY 4
+   */
+  @Post('/4')
+  @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
+  query4(@Body() obj) {
+    return this.departmentService.aggregation4(obj);
+  }
+
+  /**
+   * POST:- QUERY 3
+   */
+  @Post('/3')
+  @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
+  query3(@Body() obj) {
+    return this.departmentService.aggregation3(obj);
+  }
+
+  /**
+   * POST:- QUERY 2
+   */
+  @Post('/2')
+  @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
+  query2(@Body() obj) {
+    return this.departmentService.aggregation2(obj);
+  }
+
+  /**
+   * GET:- QUERY 1
+   */
+  @Get('/1')
+  @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
+  query1() {
+    return this.departmentService.aggregation1();
+  }
+
+  /**
+   * GET:- Get Department By ID
+   */
+  @Get('/:_id')
+  @UseGuards(AuthGuard)
+  @UseGuards(AdminGuard)
+  async findDepartmentById(@Param("_id") _id: string) {
+    return await this.departmentService.findOneDepartment(_id);
   }
 }

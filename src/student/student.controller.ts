@@ -15,6 +15,9 @@ export class StudentController {
 
     constructor(private studentService: StudentService, private authService: AuthService){}
 
+    /**
+     * POST:- Create Student
+     */
     @Post('/add')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
@@ -28,6 +31,9 @@ export class StudentController {
         return studentD;
     }
 
+    /**
+     * GET:- Find Students
+     */
     @Get()
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
@@ -35,6 +41,9 @@ export class StudentController {
         return await this.studentService.findAllStudent();
     }
     
+    /**
+     * UPDATE:- Update me
+     */
     @Patch('/update/myself')
     @UseGuards(AuthGuard)
     @UseGuards(StudentGuard)
@@ -43,14 +52,20 @@ export class StudentController {
         
         return this.studentService.findOneStudentAndUpdate(session._id, body);
     }
-
+   
+    /**
+     * UPDATE:- Update Student
+     */
     @Patch('/update/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
     getStudentByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateAllDto){
         return this.studentService.findOneStudentAndUpdate(_id,body)
     }
-
+    
+    /**
+     * DELETE:- Delete Student
+     */
     @Delete('/delete/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
@@ -61,6 +76,9 @@ export class StudentController {
         return student
     }
 
+    /**
+     * POST:- Login Student
+     */
     @Post('/login')
     async signIn(@Body() body: LoginDto, @Session() session: any) {
       
@@ -72,6 +90,9 @@ export class StudentController {
       return student;
     }
 
+    /**
+     * GET:- me
+     */
     @Get('/self')
     @UseGuards(AuthGuard)
     @UseGuards(StudentGuard)
@@ -79,6 +100,9 @@ export class StudentController {
         return await this.studentService.findStudent(session._id);
     }
 
+    /**
+     * POST:- Logout Student
+     */
     @Post('/logout')
     @UseGuards(AuthGuard)
     async logout(@Session() session:any){
@@ -91,6 +115,9 @@ export class StudentController {
         return student;
     }
 
+    /**
+     * GET:- find Student By ID
+     */
     @Get('/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)

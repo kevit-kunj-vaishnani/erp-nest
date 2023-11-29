@@ -15,6 +15,9 @@ export class UserController {
 
     constructor(private userService: UserService, private authService: AuthService){}
 
+    /**
+     * POST:- Create Users
+     */
     @Post('/add')
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
@@ -25,6 +28,9 @@ export class UserController {
         return userD;
     }
 
+    /**
+     * GET:- Find Users
+     */
     @Get()
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
@@ -32,6 +38,9 @@ export class UserController {
         return await this.userService.findAllUser();
     }
     
+    /**
+     * UPDATE:- Update me
+     */
     @Patch('/update/me')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
@@ -39,6 +48,9 @@ export class UserController {
         return this.userService.findOneUserAndUpdate(session._id, body);
     }
     
+    /**
+     * UPDATE:- Update User
+     */
     @Patch('/update/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
@@ -46,6 +58,9 @@ export class UserController {
         return this.userService.findOneUserAndUpdate(_id,body)
     }
 
+    /**
+     * DELETE:- Delete User
+     */
     @Delete('/delete/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(AdminGuard)
@@ -53,6 +68,9 @@ export class UserController {
         return this.userService.findOneUserByIdAndDelete(_id)
     }
 
+    /**
+     * POST:- Login User
+     */
     @Post('/login')
     async signIn(@Body() body: LoginDto, @Session() session: any) {
       
@@ -64,6 +82,9 @@ export class UserController {
       return user;
     }
 
+    /**
+     * GET:- me
+     */
     @Get('/self')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)
@@ -71,6 +92,9 @@ export class UserController {
         return await this.userService.findUser(session._id);
     }
 
+    /**
+     * POST:- Logout User
+     */
     @Post('/logout')
     @UseGuards(AuthGuard)
     async logout(@Session() session:any){
@@ -83,6 +107,9 @@ export class UserController {
         return user;
     }
 
+    /**
+     * GET:- find User By ID
+     */
     @Get('/:_id')
     @UseGuards(AuthGuard)
     @UseGuards(StaffAdminGuard)

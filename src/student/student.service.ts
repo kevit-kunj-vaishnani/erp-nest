@@ -21,17 +21,20 @@ export class StudentService {
         private departmentService: DepartmentService,
     ){}
 
+    // create Student
     async createStudent(createStudentDto: CreateStudentDto) {
         const student = await this.studentModel.create(createStudentDto);
         return student;
     }
 
+    // find All Students
     async findAllStudent(){
         const student = await this.studentModel.find();
         
         return student;
     }
 
+    // find One Student
     async findStudent(id:string){  
         const student = await this.studentModel.findById(id);
 
@@ -42,11 +45,13 @@ export class StudentService {
         return student;
     }
 
+    // find Student by Email
     async findByEmail(email: string) {
         const student = await this.studentModel.find({email});
         return student;
     }
 
+    // update One Student
     async findOneStudentAndUpdate(id:string, attrs: Partial<Student>){
     
         const student = await this.studentModel.findById(id);
@@ -59,6 +64,7 @@ export class StudentService {
         return student.save();
     }
 
+    // delete One Student
     async findOneStudentByIdAndDelete(id: string){
 
         const student = await this.studentModel.findById(id);
@@ -71,6 +77,7 @@ export class StudentService {
         return this.studentModel.findByIdAndDelete(id);
     }
 
+    // check seat count
     async checkSeatCount(id: string){
         const department = await this.departmentService.findOneDepartment(id)
 
@@ -80,7 +87,7 @@ export class StudentService {
         }
     }
 
-
+    // increase seat count
     async increaseSeatCount(id: string) {
       const department = await this.departmentService.findOneDepartment(id)
       
@@ -89,6 +96,7 @@ export class StudentService {
       await department.save();
     }
 
+    // decrease seat count
     async decreaseSeatOccupied(id: string) {
         const department = await this.departmentService.findOneDepartment(id);
 
@@ -101,10 +109,12 @@ export class StudentService {
         await department.save();   
     }
 
+    // delete all student having below id
     async deleteAllStudent(id: string) {
         await this.studentModel.deleteMany({departmentId: id});
     }
 
+    // delete all student
     async deleteall(){
         await this.studentModel.deleteMany();
 
