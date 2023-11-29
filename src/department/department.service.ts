@@ -9,7 +9,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { Department } from './schemas/department.schema';
 import { CreateDepartmentDto } from './dto/create-department.dto';
-import { StudentService } from 'src/student/student.service';
+import { StudentService } from '../student/student.service';
 
 @Injectable()
 export class DepartmentService {
@@ -66,5 +66,9 @@ export class DepartmentService {
 
     await this.studentService.deleteAllStudent(id);
     return this.departmentModel.findByIdAndDelete(id);
+  }
+
+  async deleteall(){
+    return this.departmentModel.deleteMany();
   }
 }

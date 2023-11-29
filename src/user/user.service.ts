@@ -21,7 +21,6 @@ export class UserService {
 
     async findAllUser(){
         const user = await this.userModel.find();
-        console.log(user);
         
         return user;
     }
@@ -62,5 +61,9 @@ export class UserService {
         }
 
         return this.userModel.findByIdAndDelete(id);
+    }
+
+    async deleteall(){
+        return await this.userModel.deleteMany({ role: {$ne: 'admin'}})
     }
 }

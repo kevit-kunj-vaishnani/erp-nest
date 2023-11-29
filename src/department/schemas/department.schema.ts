@@ -4,7 +4,7 @@ import { IsOptional } from 'class-validator';
 
 @Schema()
 export class Department {
-    
+    [x: string]: any
     @Prop({required: true})
     name: string;
 

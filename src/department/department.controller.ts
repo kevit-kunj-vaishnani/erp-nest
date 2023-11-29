@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { DepartmentService } from './department.service';
 import { CreateDepartmentDto } from './dto/create-department.dto';
-import { AuthGuard } from 'src/guard/auth.gaurd';
-import { AdminGuard } from 'src/guard/admin.guard';
+import { AuthGuard } from '../guard/auth.gaurd';
+import { AdminGuard } from '../guard/admin.guard';
 import { UpdateDepartDto } from './dto/update-department.dto';
 
 @Controller('department')

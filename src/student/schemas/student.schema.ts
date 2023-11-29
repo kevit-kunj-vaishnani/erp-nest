@@ -3,10 +3,11 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { NextFunction } from 'express';
 import { promisify } from 'util';
-import { Roles } from 'src/role';
+import { Roles } from '../../role';
 
 @Schema()
 export class Student {
+  [x: string]: any;
     
     @Prop({required: true})
     name: string;

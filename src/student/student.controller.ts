@@ -6,9 +6,9 @@ import { UpdateAllDto } from './dto/update-all-fields.dto'
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { UpdateStudentSelfDto } from './dto/update-self-password.dto';
-import { AuthGuard } from 'src/guard/auth.gaurd';
-import { StaffAdminGuard } from 'src/guard/staff-admin.guard';
-import { StudentGuard } from 'src/guard/student.guard';
+import { AuthGuard } from '../guard/auth.gaurd';
+import { StaffAdminGuard } from '../guard/staff-admin.guard';
+import { StudentGuard } from '../guard/student.guard';
 
 @Controller('student')
 export class StudentController {
