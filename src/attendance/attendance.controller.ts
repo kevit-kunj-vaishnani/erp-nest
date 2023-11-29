@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
-import { AuthGuard } from 'src/guard/auth.gaurd';
-import { AdminGuard } from 'src/guard/admin.guard';
+import { AuthGuard } from '../guard/auth.gaurd';
+import { AdminGuard } from '../guard/admin.guard';
 import { CreateAttendanceDto } from './dto/create-attendance.dto';
 import { UpdateAttendanceDto } from './dto/update-attendance.dto';
 

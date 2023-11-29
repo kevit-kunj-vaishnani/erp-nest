@@ -2,10 +2,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { NextFunction } from 'express';
+import { HydratedDocument } from 'mongoose';
 import { promisify } from 'util';
 
+export type UserDocument = HydratedDocument<User>;
 @Schema()
 export class User {
+  [x: string]: any;
     
     @Prop({required: true})
     name: string;

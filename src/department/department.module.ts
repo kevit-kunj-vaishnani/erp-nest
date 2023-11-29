@@ -4,7 +4,7 @@ import { DepartmentService } from './department.service';
 import { DepartmentController } from './department.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { DepartmentSchema } from './schemas/department.schema';
-import { StudentModule } from 'src/student/student.module';
+import { StudentModule } from '../student/student.module';
 
 
 @Module({

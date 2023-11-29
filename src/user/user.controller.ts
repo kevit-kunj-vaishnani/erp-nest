@@ -6,9 +6,9 @@ import { UpdateAllDto } from './dto/update-all-fields.dto';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { UpdateSelfDto } from './dto/update-self-password.dto';
-import { AdminGuard } from 'src/guard/admin.guard';
-import { AuthGuard } from 'src/guard/auth.gaurd';
-import { StaffAdminGuard } from 'src/guard/staff-admin.guard';
+import { AdminGuard } from '../guard/admin.guard';
+import { AuthGuard } from '../guard/auth.gaurd';
+import { StaffAdminGuard } from '../guard/staff-admin.guard';
 
 @Controller('user')
 export class UserController {

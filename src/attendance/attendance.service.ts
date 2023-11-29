@@ -63,4 +63,8 @@ export class AttendanceService {
       async deleteAllAttendance(id: string) {
         return this.attendanceModel.deleteMany({studentId:id});
       }
+
+      async deleteall(){
+        return this.attendanceModel.deleteMany();
+      }
 }

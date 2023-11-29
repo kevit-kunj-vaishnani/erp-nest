@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import { Student } from './schemas/student.schema';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { AttendanceService } from 'src/attendance/attendance.service';
-import { DepartmentService } from 'src/department/department.service';
+import { AttendanceService } from '../attendance/attendance.service';
+import { DepartmentService } from '../department/department.service';
 
 
 @Injectable()
@@ -103,5 +103,10 @@ export class StudentService {
 
     async deleteAllStudent(id: string) {
         await this.studentModel.deleteMany({departmentId: id});
+    }
+
+    async deleteall(){
+        await this.studentModel.deleteMany();
+
     }
 }
