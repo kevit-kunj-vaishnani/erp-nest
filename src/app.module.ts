@@ -13,7 +13,9 @@ import { AttendanceModule } from './attendance/attendance.module';
       envFilePath: '.env',
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.DB_URL),
+    MongooseModule.forRoot(process.env.DB_URL,{
+      dbName:process.env.DB_Name
+    }),
     UserModule,
     StudentModule,
     DepartmentModule,

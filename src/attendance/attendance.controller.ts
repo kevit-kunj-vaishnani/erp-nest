@@ -10,6 +10,9 @@ import { UpdateAttendanceDto } from './dto/update-attendance.dto';
 export class AttendanceController {
   constructor(private attendanceService: AttendanceService) {}
   
+  /**
+   * POST:- Create Attendance
+   */
   @Post('/add')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
@@ -19,6 +22,9 @@ export class AttendanceController {
     return attendanceD;
   }
 
+  /**
+   * GET:- Find Attendances
+   */
   @Get()
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
@@ -26,6 +32,9 @@ export class AttendanceController {
     return await this.attendanceService.findAllAttendance();
   }
 
+  /**
+   * GET:- Get User By ID
+   */
   @Get('/:_id')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
@@ -33,6 +42,9 @@ export class AttendanceController {
     return await this.attendanceService.findOneAttendance(_id);
   }
 
+  /**
+   * UPDATE:- Update Attendance
+   */  
   @Patch('/update/:_id')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
@@ -40,6 +52,9 @@ export class AttendanceController {
     return this.attendanceService.findOneAttendanceAndUpdate(_id, body);
   }
 
+  /**
+   * DELETE:- Delete Attendance
+   */
   @Delete('/delete/:_id')
   @UseGuards(AuthGuard)
   @UseGuards(AdminGuard)
