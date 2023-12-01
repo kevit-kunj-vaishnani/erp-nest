@@ -17,7 +17,7 @@ import {
     constructor(private userService: UserService) {}
 
     async addUser(user: CreateUserDto) {
-    
+        
         const userData = await this.userService.findByEmail(user.email);
 
         if (userData.length) {

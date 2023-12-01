@@ -35,8 +35,8 @@ export class DepartmentController {
    * GET:- Find Departments
    */
   @Get()
-  @UseGuards(AuthGuard)
-  @UseGuards(AdminGuard)
+  // @UseGuards(AuthGuard)
+  // @UseGuards(AdminGuard)
   async findDepartments() {
     return await this.departmentService.findAllDepartment();
   }

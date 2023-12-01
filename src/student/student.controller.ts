@@ -57,8 +57,8 @@ export class StudentController {
      * UPDATE:- Update Student
      */
     @Patch('/update/:_id')
-    @UseGuards(AuthGuard)
-    @UseGuards(StaffAdminGuard)
+    // @UseGuards(AuthGuard)
+    // @UseGuards(StaffAdminGuard)
     getStudentByIdAndUpdate(@Param('_id') _id: string, @Body() body: UpdateAllDto){
         return this.studentService.findOneStudentAndUpdate(_id,body)
     }
@@ -67,8 +67,8 @@ export class StudentController {
      * DELETE:- Delete Student
      */
     @Delete('/delete/:_id')
-    @UseGuards(AuthGuard)
-    @UseGuards(StaffAdminGuard)
+    // @UseGuards(AuthGuard)
+    // @UseGuards(StaffAdminGuard)
     async getStudentByIdAndDelete(@Param('_id') _id: string){
         const student = await this.studentService.findOneStudentByIdAndDelete(_id)
 

@@ -22,7 +22,7 @@ const StaffOne: CreateUserDto & { _id: Types.ObjectId } = {
   password: '1234',
   role: 'STAFF',
   designation: 'Teacher',
-  departmentId: '29872043293235235234',
+  departmentId: '2342232422323232323',
   phone: 325467445,
 };
 
@@ -30,26 +30,26 @@ const AdminOne: CreateUserDto & { _id: Types.ObjectId } = {
   _id: new Types.ObjectId(),
   email: 'admin@gmail.com',
   name: 'admin',
-  password: '123',
+  password: 'admin',
   role: 'admin',
   designation: 'teacher',
-  departmentId: '29872043293235235234',
-  phone: 852,
+  departmentId: '435093345',
+  phone: 92309832,
 };
 
 const AttendanceDemo: CreateAttendanceDto & { _id: Types.ObjectId } = {
   _id: new Types.ObjectId(),
   studentId: StudentOne._id.toString(),
   isPresent: false,
-  date: new Date('11/02/2023'),
+  date: new Date('20/10/2024'),
 };
 
 const DepartmentOne = {
   _id: new Types.ObjectId(),
   name: 'CE',
   initials: 'CE2024',
-  availableSeats: 5,
   occupiedSeats: 0,
+  availableSeats: 10,
   batch: 2024,
 };
 
